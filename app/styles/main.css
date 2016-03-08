@@ -1,0 +1,146 @@
+.btnMenu{
+    float: right;
+}
+
+.panel-group{
+    text-align: left;
+    /*line-height: 1.8em;*/
+}
+
+#altColumn{
+    text-align: left;
+}
+
+#answerContainer{
+    margin-top: 30px;
+}
+
+#radioInput{
+    margin-left:auto;
+    margin-right:auto;
+    width: 50%;
+}
+
+#headingText{
+	margin-bottom: 1%;
+}
+
+#logoContainer{
+	position: absolute;
+	bottom: 12%;
+	width: 90%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.progress-bar-success{
+  color: #ffffff;
+  background-color: #009d86;
+  border-color: #009d86;
+}
+
+.btn-primary {
+  color: #ffffff;
+  background-color: #009d86;
+  border-color: #009d86;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #068b77;
+  border-color: #068b77;
+}
+
+.container{
+	margin-top: 2%;
+	width: 90%;
+	text-align: center;
+}
+
+#questionForm .form-control{
+	width: 30%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#inputBox{
+	width: 40%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#feedbackContainer{
+
+	display:inline-block;
+	width: 40%;
+}
+
+input[type="submit"]{
+    margin-top: 0.67em;
+    width: 10%;
+}
+
+#inputGroup{
+    display: inline-block;
+	margin-top: 0em;
+	margin-bottom: 0em;
+    padding-top: 0em;
+    padding-bottom: 0em;
+}
+
+@media screen and (max-width: 768px) {
+
+    .btnMenu{
+        display: table;
+        width: 100%;
+        border-collapse: separate;
+        table-layout: fixed;
+        position: relative;
+    }
+    #questionForm .form-control,
+    input[type="submit"], .alert{
+    	width: 100%;
+        font-size: 150%;
+   	}
+    .form-control{
+        padding-top: 0.22em;
+        padding-bottom: 0.22em;
+    }
+    input[type="submit"]{
+        margin-top: 0.5em;
+
+    }
+	.container{
+	margin-top: 0.5em;
+        width: 100%;
+	}
+
+	#feedbackContainer{
+		display:inline-block;
+		width: 100%;
+    }
+
+	#radioInput{
+	    width: 100%;
+	}
+
+	#inputBox{
+	    width: 100%;
+	    margin-left:auto;
+	    margin-right:auto;
+	}
+
+    #inputGroup{
+        display: inline-block;
+    }
+
+    #headingText{
+	    margin-bottom: 0.3em;
+	    font-size: 200%;
+	    margin-top: 0em;
+	    padding-top: 0em;
+	}
+
+}

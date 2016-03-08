@@ -1,0 +1,62 @@
+<div ng-controller="PresenterCtrl">
+  <div class="row">
+    <h1 class="col-xs-12 col-sm-10">Questions</h1>
+    <div class="col-xs-12 col-sm-2">
+      <div id="btnMenu" class="btn-group btn-group-justified">
+        <div id="btnPrevQuestion" type="button" class="btn btn-default" ng-click="prevQuestion()" title="Activate previous question"><span class="glyphicon glyphicon-chevron-left"></span></div>
+        <div id="btnNextQuestion" type="button" class="btn btn-default" ng-click="nextQuestion()" title="Activate next question"><span class="glyphicon glyphicon-chevron-right"></span></div>
+      </div>
+    </div>
+    <br><br>
+  </div>
+  <div class="panel-group" id="accordian">
+    <div class="{{panelActive(question.$id)}}" ng-repeat="question in questions | orderBy: $priority">
+      <div class="panel-heading row">
+	<div class="panel-title col-xs-12 col-sm-8" ng-bind-template="{{$index+1}}. {{question.text}}"></div>
+        <div class="col-xs-12 col-sm-2" style="font-style: italic; color: grey; text-align: center;"><span ng-bind="question.type"></span><span ng-if="question.type==='number'" ng-bind-template=" <{{question.minValue}}-{{question.maxValue}}>"></span></div>
+        <div class="col-xs-12 col-md-2">
+          <div class="btn-group btnMenu btn-group-justified">
+            <div id="btnDeleteAnwsers" type="button" class="btn btn-default" title="Delete answers" ng-click="deleteAnswers($index)" ng-disabled="!question.answers"><span class="glyphicon glyphicon-floppy-remove"></span></div>
+            <div id="btnCollapseDown" type="button" class="btn btn-default" ng-click="toggleCollapse($event, '#panel_'+$index, $index)" title="Collapse down" ng-disabled="question.type != 'multiplechoice'"><span class="glyphicon glyphicon-collapse-down"></span></div>
+            <div id="btnActivateQuestion" type="button" class="btn btn-default" ng-click="activateQuestion(question)" title="Activate question"><span class="glyphicon glyphicon-eye-open"></span></div>
+            <div id="btnDeleteQuestion" type="button" class="btn btn-default" title="Delete question" ng-click="deleteQuestion(question)"><span class="glyphicon glyphicon-remove"></span></div>
+          </div>
+        </div>
+      </div>
+      <div id="panel_{{$index}}" ng-class="isCollapsed('panel_'+$index)" data-parent="#accordian">
+	<div class="panel-body">
+	  <div ng-repeat="(altKey, alternative) in question.alternatives | orderBy:'id'">
+	    <span ng-bind-template="{{$index+1}}. {{alternative.text}}"></span>
+	    <span class="badge pull-right" title="Sum of answers for this alternative" ng-bind="alternative.count"></span>
+	    <span id="btnMenu" class="btn-group btn-group-xs">
+	      <button id="btnDeleteQuestion" type="button" class="btn btn-default" title="Delete alternative" ng-click="deleteAlternative(question, altKey)"><span class="glyphicon glyphicon-remove"></span></button>
+	    </span>
+	  </div>
+	  <div><input type="text" class="form-control" placeholder="New alternative + <Enter>" ng-keyup="$parent.newAlternative($parent.question, $event)" focus-me="$parent.question.$id=== inputFocus"></div>
+	</div>
+      </div>
+    </div>
+  </div>
+  <div id="newQuestionPanel" class="panel-group">
+    <div class="panel-body">
+      <span>
+	<input type="text" ng-model="inputQuestion" tabindex="1" placeholder="New question">
+      </span>
+      <span ng-show="inputQuestion">
+	<span class="dropdown">
+	  <a data-toggle="dropdown"><input type="text" ng-readonly="true" ng-focus="dropdown" tabindex="2" ng-model="inputType" placeholder="Select answer type"></a>
+	  <ul class="dropdown-menu">
+	    <li ng-repeat="questType in questionTypes">
+	      <a ng-click="$parent.inputType=questType.type" tabindex="3" ng-bind="questType.type"></a>
+	    </li>
+	  </ul>
+	</span>
+      </span>
+      <span><input type="number" tabindex="6" ng-model="inputMinLim" ng-show="inputType=='number'" placeholder="Lower limit" required></span>
+      <span><input type="number" tabindex="7" ng-model="inputMaxLim" ng-show="inputType=='number'" placeholder="Upper limit" required></span>
+      <span id="btnMenu" class="btn-group btn-group-xs">
+	<button class="btn btn-default" ng-click="addQuestion()" ng-show="inputQuestion && inputType" tabindex="8" title="Add question"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+	<button class="btn btn-default" ng-click="deleteQuestionInput()" ng-show="inputQuestion || inputType || inputMinLim ||inputMaxLim" tabindex="8" title="Clear input"><span class="glyphicon glyphicon-arrow-left"></span></button>
+      </span>
+    </div>
+  </div>

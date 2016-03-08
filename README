@@ -1,0 +1,4 @@
+This project uses Grunt (http://gruntjs.com) as a task runner. 
+
+On OS X:
+Install node.js and npm using homebrew: https://thechangelog.com/install-node-js-with-homebrew-on-os-x/

@@ -1,0 +1,35 @@
+<div ng-cloak ng-controller="QuestionCtrl">
+  <div ng-show="activeQuestion"> <!-- ng-hide="waitingForQuestion()"> -->
+    <h1 ng-bind="activeQuestion.text" id="headingText"></h1>
+    <div ng-show="!isQuestionAnswered()">
+      <form id="questionForm" class="form-horizontal" ng-submit="answer()">
+	<div class="form-group">
+	  <div class="input" ng-show="activeQuestion.type == 'number' || activeQuestion.type == 'text'">
+	    <label id="inputBox">
+	      <input id="inputBx" class="form-control" ng-model="inputAnswer" ng-minlength="1" min={{activeQuestion.minValue}} max={{activeQuestion.maxValue}} type={{activeQuestion.type}} placeholder={{typeHint}} required/>
+	    </label>
+	  </div>
+	  <div ng-show="activeQuestion.alternatives" ng-repeat="(key, alt) in activeQuestion.alternatives" ng-init="alt.isSelected=false">
+            <div class="input-group" id="radioInput">
+              <label id="inputGroup">
+	        <span class="input-group-addon" >
+		  <input name="multi" ng-model="$parent.inputAnswer" value="{{ key }}" type="radio" required/>
+		</span>
+		<span type="text" class="form-control" ng-bind="alt.text"></span>
+	      </label>
+            </div>
+	  </div>
+	  <input class="btn btn-primary" type="submit" value="Answer" ng-show="activeQuestion.text"/><span ng-bind="Answer"></span>
+	</div>
+      </form>
+    </div>
+    <div class="alert alert-danger"  id="feedbackContainer" ng-show="showErrorFeedback()" ng-bind="feedback.msg"></div>
+  </div>
+  <div ng-show="isQuestionAnswered()">
+    <div class="alert alert-success"  id="feedbackContainer" ng-bind="feedback.msg"></div>
+    <h1>Please wait...</h1>
+  </div>
+  <div ng-hide="activeQuestion"> <!-- ng-show="waitingForQuestion()"> -->
+    <h1>Please wait...</h1>
+  </div>
+</div>

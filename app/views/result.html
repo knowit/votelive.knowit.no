@@ -1,0 +1,10 @@
+<div ng-controller="ResultCtrl">
+  <h1 ng-bind="answersObj.text"></h1>
+  <div id="answerContainer" ng-repeat="answ in answersObj.answers | orderBy:['id', 'text', 'description']" >
+    <div class="col-sm-2" id="altColumn" ng-bind="answ.description"></div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{answ.percent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{answ.percent}}%;"><span ng-show="answ.percent>0" ng-bind-template="{{answ.percent}} %"></span></div>
+    </div>
+  </div>
+  <div ng-show="answersObj.count>=0" ng-bind-template="Number of answers: {{answersObj.count}}"></div>
+</div>

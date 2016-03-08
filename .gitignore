@@ -1,0 +1,27 @@
+.target
+logs
+project/project
+project/target
+target
+tmp
+.tmp
+.history
+dist
+/.idea
+/*.iml
+/out
+/.idea_modules
+/.classpath
+/.project
+/RUNNING_PID
+/.settings
+/nbproject/private/
+*.log
+
+# added by awe
+nbproject/
+votelive.sublime-project
+votelive.sublime-workspace
+
+node_modules
+bower_components
